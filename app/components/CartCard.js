@@ -1,67 +1,83 @@
-import React, {useState} from 'react';
-import {  View,FlatList, StyleSheet, Text,TouchableOpacity,Button } from 'react-native';
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Button,
+} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useSelector } from "react-redux";
 
-
-
-const CartItem = ({item}) => (
-   
+const CartItem = ({ item }) => (
   <View style={styles.item}>
     <Text style={styles.titlefl}>Name : {item.name}</Text>
-    <Text style={styles.timefl}>Status : {item.category}</Text>
+    <Text style={styles.timefl}>Status : {item.status}</Text>
     <View style={styles.iconContainer}>
-      <TouchableOpacity onPress={() =>console.log (item.id)}>
-      <MaterialCommunityIcons name='cart-check' size={24} />
+      <TouchableOpacity onPress={() => console.log(item.id)}>
+        <MaterialCommunityIcons name="cart-check" size={24} />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => console.log (item.id)}>
-      <MaterialCommunityIcons name='trash-can-outline' size={24}/>
+      <TouchableOpacity onPress={() => console.log(item.id)}>
+        <MaterialCommunityIcons name="trash-can-outline" size={24} />
       </TouchableOpacity>
-    </View>   
+    </View>
   </View>
 );
 
-function CartCard() {
-const [cart, setCart] = useState([]);
+function CartCard2() {
+  const [data, setdata] = useState([{ id: 1, name: "sfsf", category: "sfsf" }]);
+  const stateData = useSelector((state) => state.array);
+  const tested = stateData.cart;
+  useEffect(() => {
+    console.log(stateData);
+    setdata([...data, ...[stateData.cart]]);
+    console.log(data);
+  }, [stateData]);
+
   return (
-      <View>
+    <View>
       <FlatList
-        data={cart}
-        renderItem={({item}) => <CartItem item={item} /> }
-  
-        keyExtractor={item => item.id}
-      
+        data={tested}
+        renderItem={({ item }) => <CartItem item={item} />}
+        keyExtractor={() => Math.random()}
       />
-      <Button title='Click' onPress={()=> setCart([{id:1,name:'sfsf',category:'sfsf'}])}/>
-      </View>
+    </View>
   );
 }
 const styles = StyleSheet.create({
   card: {
-    width:'100%'
+    width: "100%",
   },
 
   container: {
-    paddingTop:20
+    paddingTop: 20,
   },
 
   iconContainer: {
-    flexDirection:'row',
-    justifyContent:'space-around',
-    paddingTop: 10
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingTop: 10,
+  },
+  item: {
+    backgroundColor: "#a9a9a9",
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
   },
 
   subtextfl: {
     fontSize: 20,
   },
-  
+
   titlefl: {
     fontSize: 22,
-    fontWeight: 'bold'
+    fontWeight: "bold",
   },
-  
+
   timefl: {
     fontSize: 20,
   },
-})
+});
 
-export default CartCard;
+export default CartCard2;

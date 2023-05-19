@@ -1,21 +1,20 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import PetsFeedScreen from './PetsFeedScreen';
-import CartScreen from './CartScreen';
-import ProfileScreen from './ProfileScreen';
-
+import PetsFeedScreen from "../screens/PetsFeedScreen";
+import CartScreen from "../screens/CartScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 
 const Tab = createBottomTabNavigator();
 
-function MyTabs() {
+function DrawerNavigator() {
   return (
     <Tab.Navigator
       initialRouteName="PetsFeed"
       screenOptions={{
-        tabBarActiveTintColor: 'dodgerblue',
+        tabBarActiveTintColor: "dodgerblue",
       }}
     >
       <Tab.Screen
@@ -23,18 +22,17 @@ function MyTabs() {
         component={PetsFeedScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Pets Feed',
+          tabBarLabel: "Pets Feed",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
-        }
-      }
+        }}
       />
       <Tab.Screen
         name="Cart"
         component={CartScreen}
         options={{
-          tabBarLabel: 'Cart',
+          tabBarLabel: "Cart",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="cart" color={color} size={size} />
           ),
@@ -44,7 +42,7 @@ function MyTabs() {
         name="Profile"
         component={ProfileScreen}
         options={{
-          tabBarLabel: 'Profile',
+          tabBarLabel: "Profile",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account" color={color} size={size} />
           ),
@@ -54,4 +52,4 @@ function MyTabs() {
   );
 }
 
-export default MyTabs;
+export default DrawerNavigator;
