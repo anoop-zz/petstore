@@ -25,20 +25,13 @@ const CartItem = ({ item }) => (
   </View>
 );
 
-function CartCard2() {
-  const [data, setdata] = useState([{ id: 1, name: "sfsf", category: "sfsf" }]);
-  const stateData = useSelector((state) => state.array);
-  const tested = stateData.cart;
-  useEffect(() => {
-    console.log(stateData);
-    setdata([...data, ...[stateData.cart]]);
-    console.log(data);
-  }, [stateData]);
+function CartCard() {
+  const stateData = useSelector((state) => state.array.cart);
 
   return (
     <View>
       <FlatList
-        data={tested}
+        data={stateData}
         renderItem={({ item }) => <CartItem item={item} />}
         keyExtractor={() => Math.random()}
       />
@@ -80,4 +73,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CartCard2;
+export default CartCard;

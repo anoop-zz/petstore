@@ -16,9 +16,11 @@ function PetCard2() {
   const [count, setCount] = useState(0);
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const onChangeSearch = (query) => setSearchQuery(query);
-
+  const onChangeSearch = (query) => {
+    setSearchQuery(query);
+  };
   const dispatch = useDispatch();
+
   const handleAddcart = (item) => {
     console.log(item);
     dispatch(addData(item));
@@ -134,6 +136,7 @@ function PetCard2() {
     );
     setData(results);
   };
+
   const reloadApp = () => {
     setCount(count + 1);
     console.log(count);

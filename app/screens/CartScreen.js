@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ScrollView } from "react-native";
 
 import { Searchbar } from "react-native-paper";
 
@@ -9,14 +10,14 @@ function CartScreen() {
   const onChangeSearch = (query) => setSearchQuery(query);
 
   return (
-    <>
+    <ScrollView>
       <Searchbar
         placeholder="Search"
         onChangeText={onChangeSearch}
         value={searchQuery}
       />
       <CartCard />
-    </>
+    </ScrollView>
   );
 }
 

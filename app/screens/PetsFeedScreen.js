@@ -6,6 +6,7 @@ import {
   Modal,
   TextInput,
   TouchableWithoutFeedback,
+  ScrollView,
 } from "react-native";
 
 import { Button } from "react-native-paper";
@@ -37,7 +38,7 @@ function PetsFeedScreen(props) {
   };
 
   return (
-    <>
+    <ScrollView>
       <View style={styles.bG}>
         <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
           <View style={styles.addPetContainer}>
@@ -149,7 +150,7 @@ function PetsFeedScreen(props) {
         </View>
       </Modal>
       <PetCard />
-    </>
+    </ScrollView>
   );
 }
 const styles = StyleSheet.create({
