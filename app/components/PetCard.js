@@ -10,7 +10,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Select, VStack, CheckIcon, NativeBaseProvider } from "native-base";
 import { Searchbar } from "react-native-paper";
 import { useDispatch } from "react-redux";
-import { addData } from "../redux/stateArray";
+import { addToCart, deleteFromCart } from "../redux/stateArray";
 
 function PetCard2() {
   const [count, setCount] = useState(0);
@@ -20,11 +20,6 @@ function PetCard2() {
     setSearchQuery(query);
   };
   const dispatch = useDispatch();
-
-  const handleAddcart = (item) => {
-    console.log(item);
-    dispatch(addData(item));
-  };
 
   const Filter = () => {
     const handleFilter = (itemValue) => {
@@ -101,10 +96,10 @@ function PetCard2() {
       <Text style={styles.timefl}>Status : {item.status}</Text>
       <Text style={styles.subtextfl}>See More</Text>
       <View style={styles.iconContainer}>
-        <TouchableOpacity onPress={() => handleAddcart(item)}>
+        <TouchableOpacity onPress={() => dispatch(addToCart(item))}>
           <MaterialCommunityIcons name="cart" size={24} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => console.log(item.id)}>
+        <TouchableOpacity onPress={() => dispatch(deleteFromCart(item.id))}>
           <MaterialCommunityIcons name="trash-can-outline" size={24} />
         </TouchableOpacity>
       </View>
@@ -113,12 +108,15 @@ function PetCard2() {
 
   useEffect(() => {
     console.log("test");
-    fetch("https://petstore.swagger.io/v2/pet/findByStatus?status=pending", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    fetch(
+      "https://petstore.swagger.io/v2/pet/findByStatus?status=pending,sold,available",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((response) => response.json())
       .then((jsonData) => {
         // handle success
@@ -131,15 +129,28 @@ function PetCard2() {
   }, [count]);
 
   const handleSearch = () => {
-    const results = data.filter((item) =>
-      item.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    const results = data.filter((item) => {
+      if (item.name !== undefined) {
+        return item.name.toLowerCase().includes(searchQuery.toLowerCase());
+      }
+      return null;
+    });
     setData(results);
   };
 
   const reloadApp = () => {
     setCount(count + 1);
-    console.log(count);
+  };
+
+  const ListEmpty = () => {
+    return (
+      <View style={styles.noPets}>
+        <Text style={styles.petText}>No Pets Available</Text>
+        <TouchableOpacity onPress={reloadApp}>
+          <Text style={styles.reload}> Reload Feed</Text>
+        </TouchableOpacity>
+      </View>
+    );
   };
 
   return (
@@ -160,15 +171,8 @@ function PetCard2() {
           data={data}
           renderItem={({ item }) => <CartItem item={item} />}
           keyExtractor={() => Math.random()}
+          ListEmptyComponent={() => <ListEmpty />}
         />
-        {data.length === 0 && (
-          <View style={styles.noPets}>
-            <Text style={styles.petText}>No Pets Available</Text>
-            <TouchableOpacity onPress={reloadApp}>
-              <Text style={styles.reload}> Reload Feed</Text>
-            </TouchableOpacity>
-          </View>
-        )}
       </View>
     </NativeBaseProvider>
   );

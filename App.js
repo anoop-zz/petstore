@@ -12,7 +12,7 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Screen>
-          <DrawerNavigator />
+          <AuthNavigator />
         </Screen>
       </NavigationContainer>
     </Provider>

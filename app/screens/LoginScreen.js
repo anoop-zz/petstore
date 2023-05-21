@@ -19,10 +19,6 @@ const initialValues = {
   password: "",
 };
 
-// const onSubmit = (values) => {
-//   console.log(values);
-// };
-
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string().min(4, "Password is too short").required("Required"),

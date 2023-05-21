@@ -14,7 +14,6 @@ import * as Yup from "yup";
 import { Formik } from "formik";
 
 import PetCard from "../components/PetCard";
-import Badgecount from "../components/BadgeCount";
 
 const initialValues = {
   name: "",
@@ -121,7 +120,7 @@ function PetsFeedScreen(props) {
                   >
                     {errors.category}
                   </Text>
-                )}{" "}
+                )}
                 <TextInput
                   placeholder="Available or Unavailable"
                   onChangeText={handleChange("availability")}
@@ -130,7 +129,7 @@ function PetsFeedScreen(props) {
                   style={styles.emailInput}
                   keyboardType="default"
                   placeholderTextColor={"black"}
-                />{" "}
+                />
                 {errors.availability && (
                   <Text
                     style={{

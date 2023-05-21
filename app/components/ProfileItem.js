@@ -1,13 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { View, FlatList, StyleSheet } from "react-native";
-import {
-  Avatar,
-  Card,
-  IconButton,
-  Divider,
-  List,
-  Button,
-} from "react-native-paper";
+import React, { useState } from "react";
+
+import { Avatar, Card, IconButton, Divider, List } from "react-native-paper";
 
 function ProfileItem({ item }) {
   const [expanded, setExpanded] = useState(true);
