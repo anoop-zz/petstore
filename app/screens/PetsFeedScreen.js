@@ -14,6 +14,7 @@ import * as Yup from "yup";
 import { Formik } from "formik";
 
 import PetCard from "../components/PetCard";
+import Badgecount from "../components/BadgeCount";
 
 const initialValues = {
   name: "",

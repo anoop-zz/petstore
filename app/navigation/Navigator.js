@@ -6,6 +6,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import PetsFeedScreen from "../screens/PetsFeedScreen";
 import CartScreen from "../screens/CartScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import Badgecount from "../components/BadgeCount";
 
 const Tab = createBottomTabNavigator();
 
@@ -34,7 +35,7 @@ function DrawerNavigator() {
         options={{
           tabBarLabel: "Cart",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="cart" color={color} size={size} />
+            <Badgecount color={color} size={size} />
           ),
         }}
       />
