@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 import store from "./app/redux/store";
 
 import Screen from "./app/components/Screen";
-import DrawerNavigator from "./app/navigation/Navigator";
 import AuthNavigator from "./app/navigation/AuthNavigator";
 
 export default function App() {
